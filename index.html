@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 99%;
+            height: 907px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Provincias_2.js"></script>
+        <script src="data/Localidades_3.js"></script>
+        <script src="data/CurvasNivel_4.js"></script>
+        <script src="data/Partido_5.js"></script>
+        <script src="data/Partidos_6.js"></script>
+        <script src="data/Basurales_7.js"></script>
+        <script src="data/VillasRestoPais_8.js"></script>
+        <script src="data/VillasLaMatanza_9.js"></script>
+        <script src="data/RedFFCCRMBA_10.js"></script>
+        <script src="data/EstablecimientosEducacion_11.js"></script>
+        <script src="data/EstablecimientosSalud_12.js"></script>
+        <script src="data/EstacionFFCC_13.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-34.93761616060626,-58.9373867318671],[-34.605140325655114,-58.20033643058996]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_Satelite_0');
+        map.getPane('pane_Satelite_0').style.zIndex = 400;
+        var layer_Satelite_0 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_Satelite_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_Satelite_0;
+        map.createPane('pane_OSM_1');
+        map.getPane('pane_OSM_1').style.zIndex = 401;
+        var layer_OSM_1 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSM_1',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSM_1;
+        map.addLayer(layer_OSM_1);
+        function pop_Provincias_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Objeto'] !== null ? autolinker.link(feature.properties['Objeto'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FNA'] !== null ? autolinker.link(feature.properties['FNA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GNA'] !== null ? autolinker.link(feature.properties['GNA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAM'] !== null ? autolinker.link(feature.properties['NAM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SAG'] !== null ? autolinker.link(feature.properties['SAG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Provincias_2_0() {
+            return {
+                pane: 'pane_Provincias_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,180,60,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Provincias_2');
+        map.getPane('pane_Provincias_2').style.zIndex = 402;
+        map.getPane('pane_Provincias_2').style['mix-blend-mode'] = 'normal';
+        var layer_Provincias_2 = new L.geoJson(json_Provincias_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Provincias_2',
+            layerName: 'layer_Provincias_2',
+            pane: 'pane_Provincias_2',
+            onEachFeature: pop_Provincias_2,
+            style: style_Provincias_2_0,
+        });
+        bounds_group.addLayer(layer_Provincias_2);
+        function pop_Localidades_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? autolinker.link(feature.properties['Nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Fase'] !== null ? autolinker.link(feature.properties['Fase'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Localidades_3_0() {
+            return {
+                pane: 'pane_Localidades_3',
+                opacity: 1,
+                color: 'rgba(49,167,210,1.0)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,182,111,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Localidades_3');
+        map.getPane('pane_Localidades_3').style.zIndex = 403;
+        map.getPane('pane_Localidades_3').style['mix-blend-mode'] = 'normal';
+        var layer_Localidades_3 = new L.geoJson(json_Localidades_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Localidades_3',
+            layerName: 'layer_Localidades_3',
+            pane: 'pane_Localidades_3',
+            onEachFeature: pop_Localidades_3,
+            style: style_Localidades_3_0,
+        });
+        bounds_group.addLayer(layer_Localidades_3);
+        function pop_CurvasNivel_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CONTOUR'] !== null ? autolinker.link(feature.properties['CONTOUR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CurvasNivel_4_0() {
+            return {
+                pane: 'pane_CurvasNivel_4',
+                opacity: 1,
+                color: 'rgba(116,64,40,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_CurvasNivel_4');
+        map.getPane('pane_CurvasNivel_4').style.zIndex = 404;
+        map.getPane('pane_CurvasNivel_4').style['mix-blend-mode'] = 'normal';
+        var layer_CurvasNivel_4 = new L.geoJson(json_CurvasNivel_4, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_CurvasNivel_4',
+            layerName: 'layer_CurvasNivel_4',
+            pane: 'pane_CurvasNivel_4',
+            onEachFeature: pop_CurvasNivel_4,
+            style: style_CurvasNivel_4_0,
+        });
+        bounds_group.addLayer(layer_CurvasNivel_4);
+        function pop_Partido_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Partido'] !== null ? autolinker.link(feature.properties['Partido'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['na asen_1'] !== null ? autolinker.link(feature.properties['na asen_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['na fami_1'] !== null ? autolinker.link(feature.properties['na fami_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Fase'] !== null ? autolinker.link(feature.properties['Fase'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mujeres'] !== null ? autolinker.link(feature.properties['mujeres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['varones'] !== null ? autolinker.link(feature.properties['varones'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['personas'] !== null ? autolinker.link(feature.properties['personas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['hogares'] !== null ? autolinker.link(feature.properties['hogares'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['viv_part'] !== null ? autolinker.link(feature.properties['viv_part'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['viv_part_h'] !== null ? autolinker.link(feature.properties['viv_part_h'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Partido_5_0() {
+            return {
+                pane: 'pane_Partido_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.7)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(108,119,202,0.7)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Partido_5');
+        map.getPane('pane_Partido_5').style.zIndex = 405;
+        map.getPane('pane_Partido_5').style['mix-blend-mode'] = 'normal';
+        var layer_Partido_5 = new L.geoJson(json_Partido_5, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Partido_5',
+            layerName: 'layer_Partido_5',
+            pane: 'pane_Partido_5',
+            onEachFeature: pop_Partido_5,
+            style: style_Partido_5_0,
+        });
+        bounds_group.addLayer(layer_Partido_5);
+        function pop_Partidos_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Partido</th>\
+                        <td>' + (feature.properties['Partido'] !== null ? autolinker.link(feature.properties['Partido'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">na asen_1</th>\
+                        <td>' + (feature.properties['na asen_1'] !== null ? autolinker.link(feature.properties['na asen_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">na fami_1</th>\
+                        <td>' + (feature.properties['na fami_1'] !== null ? autolinker.link(feature.properties['na fami_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Fase'] !== null ? autolinker.link(feature.properties['Fase'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">mujeres</th>\
+                        <td>' + (feature.properties['mujeres'] !== null ? autolinker.link(feature.properties['mujeres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">varones</th>\
+                        <td>' + (feature.properties['varones'] !== null ? autolinker.link(feature.properties['varones'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">personas</th>\
+                        <td>' + (feature.properties['personas'] !== null ? autolinker.link(feature.properties['personas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">hogares</th>\
+                        <td>' + (feature.properties['hogares'] !== null ? autolinker.link(feature.properties['hogares'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">viv_part</th>\
+                        <td>' + (feature.properties['viv_part'] !== null ? autolinker.link(feature.properties['viv_part'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">viv_part_h</th>\
+                        <td>' + (feature.properties['viv_part_h'] !== null ? autolinker.link(feature.properties['viv_part_h'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Partidos_6_0() {
+            return {
+                pane: 'pane_Partidos_6',
+                opacity: 1,
+                color: 'rgba(35,35,255,0.601)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Partidos_6');
+        map.getPane('pane_Partidos_6').style.zIndex = 406;
+        map.getPane('pane_Partidos_6').style['mix-blend-mode'] = 'normal';
+        var layer_Partidos_6 = new L.geoJson(json_Partidos_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Partidos_6',
+            layerName: 'layer_Partidos_6',
+            pane: 'pane_Partidos_6',
+            onEachFeature: pop_Partidos_6,
+            style: style_Partidos_6_0,
+        });
+        bounds_group.addLayer(layer_Partidos_6);
+        function pop_Basurales_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nombre'] !== null ? autolinker.link(feature.properties['Nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Basurales_7_0() {
+            return {
+                pane: 'pane_Basurales_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(132,102,48,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Basurales_7');
+        map.getPane('pane_Basurales_7').style.zIndex = 407;
+        map.getPane('pane_Basurales_7').style['mix-blend-mode'] = 'normal';
+        var layer_Basurales_7 = new L.geoJson(json_Basurales_7, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Basurales_7',
+            layerName: 'layer_Basurales_7',
+            pane: 'pane_Basurales_7',
+            onEachFeature: pop_Basurales_7,
+            style: style_Basurales_7_0,
+        });
+        bounds_group.addLayer(layer_Basurales_7);
+        function pop_VillasRestoPais_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID renabap'] !== null ? autolinker.link(feature.properties['ID renabap'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nombre'] !== null ? autolinker.link(feature.properties['Nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Provincia'] !== null ? autolinker.link(feature.properties['Provincia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Partido'] !== null ? autolinker.link(feature.properties['Partido'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Localidad'] !== null ? autolinker.link(feature.properties['Localidad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Creacion'] !== null ? autolinker.link(feature.properties['Creacion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Tipo'] !== null ? autolinker.link(feature.properties['Tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nr person'] !== null ? autolinker.link(feature.properties['nr person'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nr familia'] !== null ? autolinker.link(feature.properties['nr familia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nr viviend'] !== null ? autolinker.link(feature.properties['nr viviend'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Fase'] !== null ? autolinker.link(feature.properties['Fase'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Acc_elec'] !== null ? autolinker.link(feature.properties['Acc_elec'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Red_cloac'] !== null ? autolinker.link(feature.properties['Red_cloac'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Acc_agu'] !== null ? autolinker.link(feature.properties['Acc_agu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Acc_redgas'] !== null ? autolinker.link(feature.properties['Acc_redgas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Calefacc'] !== null ? autolinker.link(feature.properties['Calefacc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Tenenc'] !== null ? autolinker.link(feature.properties['Tenenc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Area_ha'] !== null ? autolinker.link(feature.properties['Area_ha'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_VillasRestoPais_8_0() {
+            return {
+                pane: 'pane_VillasRestoPais_8',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(56,148,190,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_VillasRestoPais_8');
+        map.getPane('pane_VillasRestoPais_8').style.zIndex = 408;
+        map.getPane('pane_VillasRestoPais_8').style['mix-blend-mode'] = 'normal';
+        var layer_VillasRestoPais_8 = new L.geoJson(json_VillasRestoPais_8, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_VillasRestoPais_8',
+            layerName: 'layer_VillasRestoPais_8',
+            pane: 'pane_VillasRestoPais_8',
+            onEachFeature: pop_VillasRestoPais_8,
+            style: style_VillasRestoPais_8_0,
+        });
+        bounds_group.addLayer(layer_VillasRestoPais_8);
+        function pop_VillasLaMatanza_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID renabap'] !== null ? autolinker.link(feature.properties['ID renabap'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? autolinker.link(feature.properties['Nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provincia</th>\
+                        <td>' + (feature.properties['Provincia'] !== null ? autolinker.link(feature.properties['Provincia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Partido</th>\
+                        <td>' + (feature.properties['Partido'] !== null ? autolinker.link(feature.properties['Partido'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localidad</th>\
+                        <td>' + (feature.properties['Localidad'] !== null ? autolinker.link(feature.properties['Localidad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Creacion</th>\
+                        <td>' + (feature.properties['Creacion'] !== null ? autolinker.link(feature.properties['Creacion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tipo</th>\
+                        <td>' + (feature.properties['Tipo'] !== null ? autolinker.link(feature.properties['Tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nr person</th>\
+                        <td>' + (feature.properties['nr person'] !== null ? autolinker.link(feature.properties['nr person'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nr familia</th>\
+                        <td>' + (feature.properties['nr familia'] !== null ? autolinker.link(feature.properties['nr familia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nr viviend</th>\
+                        <td>' + (feature.properties['nr viviend'] !== null ? autolinker.link(feature.properties['nr viviend'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Fase'] !== null ? autolinker.link(feature.properties['Fase'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Acc_elec</th>\
+                        <td>' + (feature.properties['Acc_elec'] !== null ? autolinker.link(feature.properties['Acc_elec'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Red_cloac</th>\
+                        <td>' + (feature.properties['Red_cloac'] !== null ? autolinker.link(feature.properties['Red_cloac'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Acc_agu</th>\
+                        <td>' + (feature.properties['Acc_agu'] !== null ? autolinker.link(feature.properties['Acc_agu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Acc_redgas</th>\
+                        <td>' + (feature.properties['Acc_redgas'] !== null ? autolinker.link(feature.properties['Acc_redgas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Calefacc</th>\
+                        <td>' + (feature.properties['Calefacc'] !== null ? autolinker.link(feature.properties['Calefacc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tenenc</th>\
+                        <td>' + (feature.properties['Tenenc'] !== null ? autolinker.link(feature.properties['Tenenc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">sup_ha</th>\
+                        <td>' + (feature.properties['sup_ha'] !== null ? autolinker.link(feature.properties['sup_ha'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Enlace</th>\
+                        <td>' + (feature.properties['Enlace'] !== null ? autolinker.link(feature.properties['Enlace'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_VillasLaMatanza_9_0() {
+            return {
+                pane: 'pane_VillasLaMatanza_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,113,72,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_VillasLaMatanza_9');
+        map.getPane('pane_VillasLaMatanza_9').style.zIndex = 409;
+        map.getPane('pane_VillasLaMatanza_9').style['mix-blend-mode'] = 'normal';
+        var layer_VillasLaMatanza_9 = new L.geoJson(json_VillasLaMatanza_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VillasLaMatanza_9',
+            layerName: 'layer_VillasLaMatanza_9',
+            pane: 'pane_VillasLaMatanza_9',
+            onEachFeature: pop_VillasLaMatanza_9,
+            style: style_VillasLaMatanza_9_0,
+        });
+        bounds_group.addLayer(layer_VillasLaMatanza_9);
+        map.addLayer(layer_VillasLaMatanza_9);
+        function pop_RedFFCCRMBA_10(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? autolinker.link(feature.properties['gid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fna'] !== null ? autolinker.link(feature.properties['fna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nam'] !== null ? autolinker.link(feature.properties['nam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RedFFCCRMBA_10_0() {
+            return {
+                pane: 'pane_RedFFCCRMBA_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        function style_RedFFCCRMBA_10_1() {
+            return {
+                pane: 'pane_RedFFCCRMBA_10',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_RedFFCCRMBA_10');
+        map.getPane('pane_RedFFCCRMBA_10').style.zIndex = 410;
+        map.getPane('pane_RedFFCCRMBA_10').style['mix-blend-mode'] = 'normal';
+        var layer_RedFFCCRMBA_10 = new L.geoJson.multiStyle(json_RedFFCCRMBA_10, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_RedFFCCRMBA_10',
+            layerName: 'layer_RedFFCCRMBA_10',
+            pane: 'pane_RedFFCCRMBA_10',
+            onEachFeature: pop_RedFFCCRMBA_10,
+            styles: [style_RedFFCCRMBA_10_0,style_RedFFCCRMBA_10_1,]
+        });
+        bounds_group.addLayer(layer_RedFFCCRMBA_10);
+        function pop_EstablecimientosEducacion_11(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? autolinker.link(feature.properties['gid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['entidad'] !== null ? autolinker.link(feature.properties['entidad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['objeto'] !== null ? autolinker.link(feature.properties['objeto'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fna'] !== null ? autolinker.link(feature.properties['fna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gna'] !== null ? autolinker.link(feature.properties['gna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nam</th>\
+                        <td>' + (feature.properties['nam'] !== null ? autolinker.link(feature.properties['nam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fdc'] !== null ? autolinker.link(feature.properties['fdc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sag'] !== null ? autolinker.link(feature.properties['sag'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Partido</th>\
+                        <td>' + (feature.properties['Partido'] !== null ? autolinker.link(feature.properties['Partido'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EstablecimientosEducacion_11_0() {
+            return {
+                pane: 'pane_EstablecimientosEducacion_11',
+                radius: 1.6,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(44,193,131,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_EstablecimientosEducacion_11');
+        map.getPane('pane_EstablecimientosEducacion_11').style.zIndex = 411;
+        map.getPane('pane_EstablecimientosEducacion_11').style['mix-blend-mode'] = 'normal';
+        var layer_EstablecimientosEducacion_11 = new L.geoJson(json_EstablecimientosEducacion_11, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_EstablecimientosEducacion_11',
+            layerName: 'layer_EstablecimientosEducacion_11',
+            pane: 'pane_EstablecimientosEducacion_11',
+            onEachFeature: pop_EstablecimientosEducacion_11,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_EstablecimientosEducacion_11_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EstablecimientosEducacion_11);
+        function pop_EstablecimientosSalud_12(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? autolinker.link(feature.properties['gid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fna'] !== null ? autolinker.link(feature.properties['fna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gna'] !== null ? autolinker.link(feature.properties['gna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">nam</th>\
+                        <td>' + (feature.properties['nam'] !== null ? autolinker.link(feature.properties['nam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['turn'] !== null ? autolinker.link(feature.properties['turn'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Partido'] !== null ? autolinker.link(feature.properties['Partido'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EstablecimientosSalud_12_0() {
+            return {
+                pane: 'pane_EstablecimientosSalud_12',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/amenity=hospital.svg',
+            iconSize: [6.84, 6.84]
+        }),
+                interactive: false,
+            }
+        }
+        map.createPane('pane_EstablecimientosSalud_12');
+        map.getPane('pane_EstablecimientosSalud_12').style.zIndex = 412;
+        map.getPane('pane_EstablecimientosSalud_12').style['mix-blend-mode'] = 'normal';
+        var layer_EstablecimientosSalud_12 = new L.geoJson(json_EstablecimientosSalud_12, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_EstablecimientosSalud_12',
+            layerName: 'layer_EstablecimientosSalud_12',
+            pane: 'pane_EstablecimientosSalud_12',
+            onEachFeature: pop_EstablecimientosSalud_12,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_EstablecimientosSalud_12_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EstablecimientosSalud_12);
+        function pop_EstacionFFCC_13(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['gid'] !== null ? autolinker.link(feature.properties['gid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['objeto'] !== null ? autolinker.link(feature.properties['objeto'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fna'] !== null ? autolinker.link(feature.properties['fna'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nam'] !== null ? autolinker.link(feature.properties['nam'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_EstacionFFCC_13_0() {
+            return {
+                pane: 'pane_EstacionFFCC_13',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/transport_train_station2.svg',
+            iconSize: [9.5, 9.5]
+        }),
+                interactive: false,
+            }
+        }
+        map.createPane('pane_EstacionFFCC_13');
+        map.getPane('pane_EstacionFFCC_13').style.zIndex = 413;
+        map.getPane('pane_EstacionFFCC_13').style['mix-blend-mode'] = 'normal';
+        var layer_EstacionFFCC_13 = new L.geoJson(json_EstacionFFCC_13, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_EstacionFFCC_13',
+            layerName: 'layer_EstacionFFCC_13',
+            pane: 'pane_EstacionFFCC_13',
+            onEachFeature: pop_EstacionFFCC_13,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_EstacionFFCC_13_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_EstacionFFCC_13);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/EstacionFFCC_13.png" /> Estacion FFCC': layer_EstacionFFCC_13,'<img src="legend/EstablecimientosSalud_12.png" /> Establecimientos Salud': layer_EstablecimientosSalud_12,'<img src="legend/EstablecimientosEducacion_11.png" /> Establecimientos Educacion': layer_EstablecimientosEducacion_11,'<img src="legend/RedFFCCRMBA_10.png" /> Red FFCC RMBA': layer_RedFFCCRMBA_10,'<img src="legend/VillasLaMatanza_9.png" /> Villas La Matanza': layer_VillasLaMatanza_9,'<img src="legend/VillasRestoPais_8.png" /> Villas Resto Pais': layer_VillasRestoPais_8,'<img src="legend/Basurales_7.png" /> Basurales': layer_Basurales_7,'<img src="legend/Partidos_6.png" /> Partidos': layer_Partidos_6,'<img src="legend/Partido_5.png" /> Partido': layer_Partido_5,'<img src="legend/CurvasNivel_4.png" /> Curvas Nivel': layer_CurvasNivel_4,'<img src="legend/Localidades_3.png" /> Localidades': layer_Localidades_3,'<img src="legend/Provincias_2.png" /> Provincias': layer_Provincias_2,"OSM": layer_OSM_1,"Satelite": layer_Satelite_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_Partidos_6.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Partido'] !== null?String('<div style="color: #2b6127; font-size: 8pt; font-family: \'Arial Black\', sans-serif;">' + layer.feature.properties['Partido']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Partidos_6'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_Basurales_7.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Nombre'] !== null?String('<div style="color: #323232; font-size: 6pt; font-weight: bold; font-family: \'Arial Black\', sans-serif;">' + layer.feature.properties['Nombre']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Basurales_7'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_VillasLaMatanza_9.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['Nombre'] !== null?String('<div style="color: #323232; font-size: 6pt; font-family: \'Arial Black\', sans-serif;">' + layer.feature.properties['Nombre']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VillasLaMatanza_9'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_Provincias_2,layer_Localidades_3,layer_CurvasNivel_4,layer_Partidos_6,layer_Basurales_7,layer_VillasLaMatanza_9]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Provincias_2,layer_Localidades_3,layer_CurvasNivel_4,layer_Partidos_6,layer_Basurales_7,layer_VillasLaMatanza_9]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Provincias_2,layer_Localidades_3,layer_CurvasNivel_4,layer_Partidos_6,layer_Basurales_7,layer_VillasLaMatanza_9]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Provincias_2,layer_Localidades_3,layer_CurvasNivel_4,layer_Partidos_6,layer_Basurales_7,layer_VillasLaMatanza_9]);
+        });
+        </script>
+    </body>
+</html>
